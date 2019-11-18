@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<h2>Welcome to {{ name }}!</h2><br />
+	<p>We will help you design your blog/website according to the usual contents you write about.</p>
+	<h5>Please enter your typical content/article:</h5>
+	<textarea rows="8" cols="90"></textarea><br />
+	<h5>...Or paste the url of your blog/website:</h5>
+	<input type="text" name="url" size="88"><br /><br>
+	<div class="text-center">
+		<a href="/result" type="button" class="btn btn-primary" style="background-color: #74a0b5;">OK</a>
+	</div>
+{% endblock content %}
