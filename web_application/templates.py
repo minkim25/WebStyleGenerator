@@ -18,6 +18,14 @@ popular_topics = ['popular topic 1', 'popular topic 2', 'popular topic 3', 'popu
 def home():
 	return render_template('home.html', name=web_name, popular=popular_topics)
 
+@app.route('/website')
+def website():
+	return render_template('website.html', name=web_name, popular=popular_topics)
+
+@app.route('/blog')
+def blog():
+	return render_template('blog.html', name=web_name, popular=popular_topics)
+
 @app.route('/about')
 def about():
 	return render_template('about.html', title='About', name=web_name, popular=popular_topics)
