@@ -2,12 +2,29 @@
 {% block content %}
 	<h2>Welcome to {{ name }}!</h2><br />
 	<h5>The recommended styles for your blog/website are:</h5><br />
-	<div>
-		<p>I have no idea how to present the result...lol<br>
-		When a side option is clicked, it will go to this page as well</p>
+	<div class="row">
+		{% for i in range(3) %}
+			<div class="col-md-4">
+				<div style="width:150px;height:200px;border:1px solid #000;background-color:{{back_color[i]}};">
+					<p style="font-family:{{title_font[i]}};color:{{text_color[i]}};margin:15px 25px 15px"><b>Sample Title</b></p>
+					<p style="font-family:{{body_font[i]}};color:{{text_color[i]}};margin:10px;">This is sample text in the body section</p>
+					<a href="#" style="color:{{link_color[i]}};font-family:{{body_font[i]}};margin:0px 10px 10px;"><u>Sample Link</u></a>
+				</div>
+				<br>
+				<p>
+					title_font = {{title_font[i]}}<br />
+					body_font  = {{body_font[i]}}<br />
+					back_color = {{back_color[i]}}<br />
+					text_color = {{text_color[i]}}<br />
+					link_color = {{link_color[i]}}<br />
+				</p>
+			</div>
+		{% endfor %}
 	</div>
-
+	<br><br>
 	<div class="text-center">
 		<a href="/home" type="button" class="btn btn-primary" style="background-color: #74a0b5;">Go Back</a>
 	</div>
+
+	
 {% endblock content %}
