@@ -1,0 +1,6 @@
+Run jupyter notebook in the cluster
+
+ssh -L 8089:localhost:8089 donggul@gateway.sfucloud.ca
+jupyter notebook --port=8089 --no-browser
+
+
