@@ -14,6 +14,9 @@
 # Tasks Due for Nov 28th
 <img src="pictures/CMPT732ProjectPlanWeek3.jpg">
 
+# Project Outline
+<img src="pictures/ProjectOutline.jpeg">
+
 # Authenticate via OAuth
 client = pytumblr.TumblrRestClient(
 	'nAvaCgNT6dVls4dxKYnWyM1as57L0aSAkSXAayRCPEtNxJSQjr',
