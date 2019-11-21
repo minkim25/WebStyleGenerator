@@ -2,12 +2,29 @@
 {% block content %}
 	<h2>Blog Style Generator</h2><br />
 	<p>We will help you design your blog according to the usual contents you write about.</p>
-	<h5>Please enter your typical content/article:</h5>
+
+	<div class="content-section">
+	    <form method="POST" action="">
+	    	<h5>Please enter your typical content/article:</h5><br>
+	        {{ form.hidden_tag() }}
+	        <fieldset class="form-group">
+	            <div class="form-group">
+	                {{ form.content(class="form-control form-control-lg") }}
+	            </div>
+	        </fieldset>
+	        <div class="form-group">
+	            {{ form.submit(class="btn btn-outline-info") }}
+	        </div>
+	    </form>
+	</div>
+	
+	<!-- <h5>Please enter your typical content/article:</h5>
 	<textarea rows="8" cols="90"></textarea><br />
 	<h5>...Or paste the url of your blog:</h5>
 	<input type="text" name="url" size="88"><br /><br>
 	<div class="text-center">
 		<a href="/home" type="button" class="btn btn-primary" style="background-color: white; color:black;">Go Back</a>
 		<a href="/result" type="button" class="btn btn-primary" style="background-color: #74a0b5;">OK</a>
-	</div>
+	</div> -->
+
 {% endblock content %}

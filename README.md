@@ -6,6 +6,10 @@
 
 <b>Demo Day:</b> 20190-12-05 10am - 1pm in the Big Data atrium
 
+pip install flask
+pip install flask-wtf
+# python run.py
+
 <img src="pictures/Cmpt732ProjectPlan.jpg">
 
 # Tasks Due for Nov 20th
