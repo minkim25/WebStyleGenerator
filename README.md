@@ -1,5 +1,11 @@
 # WebcrawlStyleCreator
 
+<b>Project Submission:</b> https://coursys.sfu.ca/2019fa-cmpt-732-g1/+proj/submission/
+
+<b>Due Date:</b> 2019-12-06
+
+<b>Demo Day:</b> 20190-12-05 10am - 1pm in the Big Data atrium
+
 <img src="pictures/Cmpt732ProjectPlan.jpg">
 
 # Tasks Due for Nov 20th
