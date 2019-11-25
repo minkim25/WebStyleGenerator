@@ -1,0 +1,15 @@
+First time set-up:
+1. Type `python -m venv app-env` in the main repo. We used anaconda as our default python, but other versions > 3.5 should work as well.
+2. See SFU 732 instructions for installing PySpark and Cassandra on your server
+
+Launching the web application:
+1. If you are on a windows server, type `app-env\Scripts\activate.bat`
+   Otherwise you can type `app-env\Scripts\activate.sh`
+2. Then install the required libraries from the "requirements.txt" by typing:
+   `pip install -r requirements.txt`
+3. You can now run the web application by typing:
+   `python run.py`
+
+Re-running the data pipeline for a new batch of websites:
+<work in progress>
+
