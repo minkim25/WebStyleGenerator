@@ -12,3 +12,4 @@ numpy == 1.16.4
 PyTumblr == 0.1.0
 Flask == 1.1.1
 Flask-WTF == 0.14.2
+pyemd == 0.5.1
