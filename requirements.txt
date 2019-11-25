@@ -1,14 +1,15 @@
-pyspark                            2.4.4
-gensim                             3.8.1
-cassandra-driver                   3.19.0
-cql                                1.4.0
-cqlsh                              5.0.4
-beautifulsoup4                     4.7.1
-urllib3                            1.24.2
-cssutils                           1.0.2
-nltk                               3.4.4
-pandas                             0.24.2
-numpy                              1.16.4
-PyTumblr                           0.1.0
-Flask                              1.1.1
-Flask-WTF                          0.14.2
+pyspark == 2.4.4
+gensim == 3.8.1
+cassandra-driver == 3.19.0
+cql == 1.4.0
+cqlsh == 5.0.4
+beautifulsoup4 == 4.7.1
+urllib3 == 1.24.2
+cssutils == 1.0.2
+nltk == 3.4.4
+pandas == 0.24.2
+numpy == 1.16.4
+PyTumblr == 0.1.0
+Flask == 1.1.1
+Flask-WTF == 0.14.2
+pyemd == 0.5.1

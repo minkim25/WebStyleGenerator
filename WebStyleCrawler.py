@@ -12,6 +12,7 @@ import numpy as np
 import pandas as pd
 from pandas.io.formats.style import Styler
 import nltk
+import sys
 import re
 import pickle
 
@@ -279,25 +280,25 @@ Row = []
 # In[47]:
 
 
-for row in df.values[start:end]:
+for row in df.values[int(start):int(end)]:
     if row[0] % 100 == 0:
-        print(row[2],str(row[1]))
+        print(row[0],str(row[1]))
+    Row.append(row[1])
     Row.append(row[2])
-    Row.append(row[3])
     
     try:
-        colors = getBackgroundColors('https://www.'+row[2]+'/',3,False).values
+        colors = getBackgroundColors('https://www.'+row[1]+'/',3,False).values
     except:
         colors = []
     Row.append(colors)
     
     try:
-        fonts = getFonts('https://www.'+row[2]+'/',3).values
+        fonts = getFonts('https://www.'+row[1]+'/',3).values
     except:
         fonts = []
     Row.append(fonts)
     
-    text = websiteAboutTextOrMainPage('https://www.'+row[2]+'/')
+    text = websiteAboutTextOrMainPage('https://www.'+row[1]+'/')
     Row.append(text)
     
     Table.append(Row)
@@ -319,5 +320,4 @@ pd.DataFrame(Table,columns=['Website','WebsiteCategory','Colors','Fonts','Text']
 # In[ ]:
 
 
-pd.DataFrame(Table).to_csv('alexa_websites_'+str(start)+'_'+str(end)+'.csv')
 
