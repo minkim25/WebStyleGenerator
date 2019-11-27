@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 	<h2>Welcome to {{ name }}!</h2><br />
-	<h5>The recommended styles for your blog/website are:</h5><br />
+	<h5>The recommended styles for your blog are:</h5><br />
 	<div class="row">
 		{% for i in range(3) %}
 			<div class="col-md-4">
@@ -25,6 +25,17 @@
 	<div class="text-center">
 		<a href="/home" type="button" class="btn btn-primary" style="background-color: #74a0b5;">Go Back</a>
 	</div>
-
-	
 {% endblock content %}
+
+{% block popular %}
+	<div class="content-section">
+		<h3>Top 5 Popular Topics</h3>
+		<p class='text-muted'>You can choose any topic you'd like.
+			<ul class="list-group">
+				{% for i in range(5) %}
+					<li class="list-group-item list-group-item-light"><a href="{{ url_for('result_blog', topic=popular[i]) }}">{{popular[i]}}</a></li>
+				{% endfor %}
+			</ul>
+		</p>
+	</div>
+{% endblock popular %}

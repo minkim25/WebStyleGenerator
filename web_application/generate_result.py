@@ -1,17 +1,8 @@
 
-def gen_result(post_type, content):
+def get_blog_result(content):
 
-	if post_type == "blog":
-		# load cached blog_model
-		# transformed = blog_model.transform(content)
-		t = ""
-	elif post_type == "web":
-		# load cached web_model
-		# transformed = web_model.transform(content)
-		t = ""
-	else:
-		# transformed = None
-		t = ""
+	# load cached web_model
+	# transformed = web_model.transform(content)
 
 	# get dict of lists of top 3 recommending styles for each attribute
 	# below is a sample result variable that I will use to build flask application
@@ -22,6 +13,26 @@ def gen_result(post_type, content):
 		'back_color': ['#5ee682','#d4e8ff','#c389cc'],
 		'text_color': ['#7a5835','#8a8563','#444444'],
 		'link_color': ['#2c451d','#529ECC','#9767a1']
+	}
+
+	return result
+
+
+def get_web_result(content):
+
+	# load cached blog_model
+	# transformed = blog_model.transform(content)
+
+	# get dict of lists of top 3 recommending styles for each attribute
+	# below is a sample result variable that I will use to build flask application
+
+	result = {
+		'colors': [[['#f9f9f9', 2], ['#141a64', 1], ['#e6e6e6', 1]],
+				 [['#f9f9f9', 2], [' #5B5B5', 1], ['#e6e6e6', 1]],
+				 [['#404040', 1], ['#F06D65', 1], ['#f1f1f1', 1]]],
+		'fonts': [[["font-family: 'raleway'", '6'], ['font-family:arial', '5'], ['font-family:"GlyphIcons"', '3']],
+				 [['font-family:"Barlow Condensed",arial', '9'], ['font-family:"Lato",arial', '7'], ['font-family:arial', '4']],
+				 [["font-family: 'Roboto', sans-serif", '9'], ['font-family: Arial, Helvetica, sans-serif', '1'], ["font-family:'FontAwesome'", '1']]]
 	}
 
 	return result

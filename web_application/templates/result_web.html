@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<h2>Welcome to {{ name }}!</h2><br />
+	<h5>The recommended styles for your website are:</h5><br />
+	{% for i in range(3) %}
+		<h5>Option {{i+1}}:</h5><br>
+		<div class="row">
+			{% for j in range(3) %}
+				<div class="col-md-4">
+					<div style="width:150px;height:200px;border:1px solid #000;background-color:{{colors[i][j][0]}};">
+						<p style="margin:85px 15px 15px;text-shadow: 1px 1px black;color:white">Colour: {{colors[i][j][0]}}</p>
+					</div>
+				</div>
+			{% endfor %}
+			<br>
+			<div style="margin:25px;">
+				<p>
+				{% for j in range(3) %}
+					<font style="{{fonts[i][j][0]}};">Sample font style {{j+1}}= {{fonts[i][j][0]}}</font><br>
+				{% endfor %}
+				</p>
+			</div>
+			
+		</div><br>
+	{% endfor %}
+	<br><br>
+	<div class="text-center">
+		<a href="/home" type="button" class="btn btn-primary" style="background-color: #74a0b5;">Go Back</a>
+	</div>
+{% endblock content %}
+
+{% block popular %}
+	<div class="content-section">
+		<h3>Top 5 Popular Themes</h3>
+		<p class='text-muted'>You can choose any theme you'd like.
+			<ul class="list-group">
+				{% for i in range(5) %}
+					<li class="list-group-item list-group-item-light"><a href="{{ url_for('result_web', topic=popular[i]) }}">{{popular[i]}}</a></li>
+				{% endfor %}
+			</ul>
+		</p>
+	</div>
+{% endblock popular %}

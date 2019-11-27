@@ -17,14 +17,17 @@
 	        </div>
 	    </form>
 	</div>
-	
-	<!-- <h5>Please enter your typical content/article:</h5>
-	<textarea rows="8" cols="90"></textarea><br />
-	<h5>...Or paste the url of your blog:</h5>
-	<input type="text" name="url" size="88"><br /><br>
-	<div class="text-center">
-		<a href="/home" type="button" class="btn btn-primary" style="background-color: white; color:black;">Go Back</a>
-		<a href="/result" type="button" class="btn btn-primary" style="background-color: #74a0b5;">OK</a>
-	</div> -->
-
 {% endblock content %}
+
+{% block popular %}
+	<div class="content-section">
+		<h3>Top 5 Popular Topics</h3>
+		<p class='text-muted'>You can choose any topic you'd like.
+			<ul class="list-group">
+				{% for i in range(5) %}
+					<li class="list-group-item list-group-item-light"><a href="{{ url_for('result_blog', topic=popular[i]) }}">{{popular[i]}}</a></li>
+				{% endfor %}
+			</ul>
+		</p>
+	</div>
+{% endblock popular %}
