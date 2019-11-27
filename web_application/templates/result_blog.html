@@ -1,7 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
-	<h2>Welcome to {{ name }}!</h2><br />
-	<h5>The recommended styles for your blog are:</h5><br />
+	<h3>Thank you for using {{ name }}!</h3><br />
+	{% if topic %}
+		<h5>The recommended styles for  <u>{{ topic }}</u> are:</h5><br />
+	{% else %}
+		<h5>The recommended styles for your blog are:</h5><br />
+	{% endif %}
+	
 	<div class="row">
 		{% for i in range(3) %}
 			<div class="col-md-4">

@@ -15,7 +15,7 @@
 		<p class='text-muted'>You can choose any topic you'd like.
 			<ul class="list-group">
 				{% for i in range(5) %}
-					<li class="list-group-item list-group-item-light"><a href="{{ url_for('result_blog', topic=popular[i]) }}">{{popular[i]}}</a></li>
+					<li class="list-group-item list-group-item-light"><a href="{{ url_for('result_web', topic=popular[i]) }}">{{popular[i]}}</a></li>
 				{% endfor %}
 			</ul>
 		</p>

@@ -21,7 +21,7 @@ class PostForm(FlaskForm):
 @app.route('/')
 @app.route('/home')
 def home():
-	return render_template('home.html', name=web_name, popular=pop_topics_blog)
+	return render_template('home.html', name=web_name, popular=pop_topics_web)
 
 @app.route('/website', methods=['GET', 'POST'])
 def website():
@@ -42,7 +42,7 @@ def result_web():
 		colors = returned['colors']
 		fonts = returned['fonts']
 	return render_template('result_web.html', name=web_name, \
-		colors=colors, fonts=fonts, popular=pop_topics_web)
+		colors=colors, fonts=fonts, popular=pop_topics_web, topic=topic)
 
 @app.route('/blog', methods=['GET', 'POST'])
 def blog():
@@ -73,11 +73,11 @@ def result_blog():
 	return render_template('result_blog.html', name=web_name, \
 		title_font=title_font, body_font=body_font, \
 		back_color=back_color, text_color=text_color, link_color=link_color, \
-		popular=pop_topics_blog)
+		popular=pop_topics_blog, topic=topic)
 
 @app.route('/about')
 def about():
-	return render_template('about.html', title='About', name=web_name, popular=pop_topics_blog)
+	return render_template('about.html', title='About', name=web_name, popular=pop_topics_web)
 
 if __name__ == '__main__':
 	app.run(debug=True)

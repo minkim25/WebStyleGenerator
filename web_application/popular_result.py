@@ -48,9 +48,9 @@ def pop_result_web(topic):
 		'colors': [[['#f9f9f9', 2], ['#141a64', 1], ['#e6e6e6', 1]],
 				 [['#f9f9f9', 2], [' #5B5B5', 1], ['#e6e6e6', 1]],
 				 [['#404040', 1], ['#F06D65', 1], ['#f1f1f1', 1]]],
-		'fonts': [[["font-family: 'raleway'", '6'], ['font-family:arial', '5'], ['font-family:"GlyphIcons"', '3']],
-				 [['font-family:"Barlow Condensed",arial', '9'], ['font-family:"Lato",arial', '7'], ['font-family:arial', '4']],
-				 [["font-family: 'Roboto', sans-serif", '9'], ['font-family: Arial, Helvetica, sans-serif', '1'], ["font-family:'FontAwesome'", '1']]]
+		'fonts': [[["font-family: 'raleway'", 6], ['font-family:arial', 5], ['font-family:"GlyphIcons"', 3]],
+				 [['font-family:"Barlow Condensed",arial', 9], ['font-family:"Lato",arial', 7], ['font-family:arial', 4]],
+				 [["font-family: 'Roboto', sans-serif", 9], ['font-family: Arial, Helvetica, sans-serif', 1], ["font-family:'FontAwesome'", 1]]]
 	}
 
 	return result

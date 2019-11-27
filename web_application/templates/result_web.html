@@ -1,27 +1,49 @@
 {% extends 'layout.html' %}
 {% block content %}
-	<h2>Welcome to {{ name }}!</h2><br />
-	<h5>The recommended styles for your website are:</h5><br />
+	<h3>Thank you for using {{ name }}!</h3><br />
+	{% if topic %}
+		<h5>The recommended styles for <u>{{ topic }}</u> are:</h5><br />
+	{% else %}
+		<h5>The recommended styles for your website are:</h5><br />
+	{% endif %}
+	
 	{% for i in range(3) %}
 		<h5>Option {{i+1}}:</h5><br>
 		<div class="row">
 			{% for j in range(3) %}
-				<div class="col-md-4">
-					<div style="width:150px;height:200px;border:1px solid #000;background-color:{{colors[i][j][0]}};">
-						<p style="margin:85px 15px 15px;text-shadow: 1px 1px black;color:white">Colour: {{colors[i][j][0]}}</p>
-					</div>
-				</div>
+				<!-- <div class="col-md-4" style="align-self: center;"> -->
+					{% if colors[i][j][1] > 1 %}
+					<div style="width:170px;height:170px;border:1px solid #000;background-color:{{colors[i][j][0]}};margin-top: auto;">
+						<p style="margin:70px 25px 15px;text-shadow: 1px 1px black;color:white">Colour: {{colors[i][j][0]}}</p>
+					</div>&emsp;
+					{% elif colors[i][j][1] == 1 %}
+					<div style="width:120px;height:120px;border:1px solid #000;background-color:{{colors[i][j][0]}};margin-top: auto;">
+						<p style="margin:35px 25px 15px;text-shadow: 1px 1px black;color:white">Colour: {{colors[i][j][0]}}</p>
+					</div>&emsp;
+					{% else %}
+					<div style="width:100px;height:100px;border:1px solid #000;background-color:{{colors[i][j][0]}};margin-top: auto;">
+						<p style="margin:45px 15px 15px;text-shadow: 1px 1px black;color:white">Colour: {{colors[i][j][0]}}</p>
+					</div>&emsp;
+					{% endif %}
+				<!-- </div> -->
 			{% endfor %}
 			<br>
-			<div style="margin:25px;">
+			<div style="margin:15px 15px 0px;">
 				<p>
 				{% for j in range(3) %}
-					<font style="{{fonts[i][j][0]}};">Sample font style {{j+1}}= {{fonts[i][j][0]}}</font><br>
+					{% if fonts[i][j][1] > 8 %}
+						<font style="{{fonts[i][j][0]}};font-size:20px;">Sample font style {{j+1}}= {{fonts[i][j][0]}}</font><br>
+					{% elif fonts[i][j][1] > 4 %}
+						<font style="{{fonts[i][j][0]}};font-size:17px;">Sample font style {{j+1}}= {{fonts[i][j][0]}}</font><br>
+					{% else %}
+						<font style="{{fonts[i][j][0]}};font-size:14px;">Sample font style {{j+1}}= {{fonts[i][j][0]}}</font><br>
+					{% endif %}
 				{% endfor %}
 				</p>
 			</div>
 			
-		</div><br>
+		</div>
+		<hr/>
 	{% endfor %}
 	<br><br>
 	<div class="text-center">
