@@ -8,12 +8,18 @@
 	{% endif %}
 	
 	<div class="row">
-		{% for i in range(3) %}
-			<div class="col-md-4">
-				<div style="width:150px;height:200px;border:1px solid #000;background-color:{{back_color[i]}};">
-					<p style="font-family:{{title_font[i]}};color:{{text_color[i]}};margin:15px 25px 15px"><b>Sample Title</b></p>
-					<p style="font-family:{{body_font[i]}};color:{{text_color[i]}};margin:10px;">This is sample text in the body section</p>
-					<a href="#" style="color:{{link_color[i]}};font-family:{{body_font[i]}};margin:0px 10px 10px;"><u>Sample Link</u></a>
+		{% for i in range(4) %}
+			<div class="col-md-6">
+				<div style="width:300px;height:400px;border:1px solid #000;background-color:{{back_color[i]}};padding:33px 32px 10px;">
+					<div style="width:230px;height:150px;border:0px solid #000;background-color:white;margin-top: auto;">
+						<p style="font-family:{{title_font[i]}};color:{{text_color[i]}};margin:15px 20px 15px;padding:10px 0px 0px;"><b>Sample Title 1</b></p>
+						<p style="font-family:{{body_font[i]}};color:{{text_color[i]}};margin:10px;">This is sample text in the body section</p>
+						<a href="#" style="color:{{link_color[i]}};font-family:{{body_font[i]}};margin:0px 10px 10px;"><u>Sample Link</u></a>
+					</div>
+					<div style="width:230px;height:120px;border:0px solid #000;background-color:white;margin-top: auto;">
+						<p style="font-family:{{title_font[i]}};color:{{text_color[i]}};margin:15px 20px 15px;padding:10px 0px 0px;"><b>Sample Title 2</b></p>
+						<p style="font-family:{{body_font[i]}};color:{{text_color[i]}};margin:10px;">This is sample text in the body section</p>
+					</div>
 				</div>
 				<br>
 				<p>

@@ -29,11 +29,11 @@ def pop_result_blog(topic):
 	# below is a sample result variable that I will use to build flask application
 
 	result = {
-		'title_font': ['Courier New','Gibson','Times'],
-		'body_font': ['Times','Courier New','Helvetica Neue'],
-		'back_color': ['#c389cc','#d4e8ff','#5ee682'],
-		'text_color': ['#7a5835','#8a8563','#444444'],
-		'link_color': ['#2c451d','#529ECC','#9767a1']
+		'title_font': ['Courier New','Gibson','Times','Courier New'],
+		'body_font': ['Times','Courier New','Helvetica Neue','Courier New'],
+		'back_color': ['#c389cc','#d4e8ff','#5ee682','#c389cc'],
+		'text_color': ['#7a5835','#8a8563','#444444','#7a5835'],
+		'link_color': ['#2c451d','#529ECC','#9767a1','#9767a1']
 	}
 
 	return result
