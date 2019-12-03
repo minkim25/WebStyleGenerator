@@ -14,7 +14,6 @@ pop_topics_web = pop_topics_web()
 
 class PostForm(FlaskForm):
 	content = TextAreaField('Content', validators=[DataRequired()])
-	# url = StringField('url', validators=[DataRequired()])
 	submit = SubmitField('OK')
 
 
@@ -31,8 +30,12 @@ def website():
 		returned = get_web_result(form.content.data)
 		colors = returned['colors']
 		fonts = returned['fonts']
+		f_size = returned['f_size']
+		c_size = returned['c_size']
+		texts = form.content.data
 		return render_template('result_web.html', name=web_name, \
-			colors=colors, fonts=fonts, popular_web=pop_topics_web, popular_blog=pop_topics_blog)
+			colors=colors, fonts=fonts, texts=texts, f_size=f_size, c_size=c_size, \
+			popular_web=pop_topics_web, popular_blog=pop_topics_blog)
 	return render_template('website.html', name=web_name, form=form, \
 		popular_web=pop_topics_web, popular_blog=pop_topics_blog)
 
@@ -43,8 +46,12 @@ def result_web():
 		returned = pop_result_web(topic)
 		colors = returned['colors']
 		fonts = returned['fonts']
+		texts = returned['texts']
+		f_size = returned['f_size']
+		c_size = returned['c_size']
 	return render_template('result_web.html', name=web_name, \
-		colors=colors, fonts=fonts, popular_web=pop_topics_web, popular_blog=pop_topics_blog, topic=topic)
+		colors=colors, fonts=fonts, texts=texts, f_size=f_size, c_size=c_size, \
+		popular_web=pop_topics_web, popular_blog=pop_topics_blog, topic=topic)
 
 @app.route('/blog', methods=['GET', 'POST'])
 def blog():
