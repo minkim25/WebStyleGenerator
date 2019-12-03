@@ -4,16 +4,3 @@
 	<p>Somebody write this page plz<br>
 	It should be about both this application and us</p>
 {% endblock content %}
-
-{% block popular %}
-	<div class="content-section">
-		<h3>Top 5 Popular Topics</h3>
-		<p class='text-muted'>You can choose any topic you'd like.
-			<ul class="list-group">
-				{% for i in range(5) %}
-					<li class="list-group-item list-group-item-light"><a href="{{ url_for('result_web', topic=popular[i]) }}">{{popular[i]}}</a></li>
-				{% endfor %}
-			</ul>
-		</p>
-	</div>
-{% endblock popular %}

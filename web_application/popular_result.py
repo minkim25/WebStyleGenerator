@@ -7,7 +7,7 @@ def pop_topics_blog():
 	# (To shorten the running time, we may insert the topics into the cassandra table in other code and just select here)
 	# below is a sample result variable that I will use to build flask application
 
-	result = ['blog1', 'anime', 'shopping', 'popular topic 4', 'popular topic 5']
+	result = ['blog1', 'anime', 'shopping']
 
 	return result
 
@@ -17,7 +17,7 @@ def pop_topics_web():
 	# (To shorten the running time, we may insert the topics into the cassandra table in other code and just select here)
 	# below is a sample result variable that I will use to build flask application
 
-	result = ['web1', 'web2', 'web3', 'popular topic 4', 'popular topic 5']
+	result = ['web1', 'web2', 'web topic 3']
 
 	return result
 
