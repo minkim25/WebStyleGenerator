@@ -9,17 +9,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='main.css')}}">
 
-	{% if title %}
-		<title>{{name}} - {{title}}</title>
-	{% else %}
-		<title>{{name}}</title>
-	{% endif %}
-
 </head>
-<body>
+<body style="background:{{iback_color}};">
 	<header class="site-header">
 		<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
-			<div class="container" style="padding:0px 200px 0px;">
+			<div class="container" style="padding:0px 300px 0px;">
 				<a class="navbar-brand mr-4" href="/">{{name}}</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -36,8 +30,23 @@
 		</nav>
 	</header>
 
-	<main role="main" class="container" style="padding:0px 200px 0px;">
-		{% block content %}{% endblock %}
+	<main role="main" class="container" style="padding:15px 300px 0px;">
+		<div style="width:530px;height:400px;border:0px solid #000;background-color:white;margin-top: auto;">
+			<p style="font-family:{{ititle_font}};color:{{itext_color}};margin:15px 20px 15px;padding:25px 10px 0px;font-size:22px;"><b>Sample Title 1</b></p>
+			<p style="font-family:{{ibody_font}};color:{{itext_color}};margin:10px;padding:0px 20px 0px;">
+				{{raw_text}}
+				<br><a href="#" style="color:{{ilink_color}};"><u>Go back by back arrow</u></a>
+			</p>
+			
+		</div><br>
+		<div style="width:530px;height:150px;border:0px solid #000;background-color:white;margin-top: auto;">
+			<p style="font-family:{{ititle_font}};color:{{itext_color}};margin:15px 20px 15px;padding:25px 10px 0px;font-size:22px;"><b>Sample Title 1</b></p>
+			<p style="font-family:{{ibody_font}};color:{{itext_color}};margin:10px;padding:0px 20px 0px;">
+				This is sample text in the body section
+				<br><a href="#" style="color:{{ilink_color}};"><u>Go back by back arrow</u></a>
+			</p>
+		</div><br><br>
+
 	</main>
 
     <!-- Optional JavaScript -->
@@ -48,4 +57,3 @@
 
 </body>
 </html>
-
