@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[15]:
-
-
 from bs4 import BeautifulSoup
 import urllib, random, re, string
 import cssutils
@@ -24,18 +21,6 @@ otherWordsNotWanted = pickle.load(infile)
 infile.close()
 
 
-# In[ ]:
-
-
-inputs = sys.argv[1] #'alexa_websites_All.csv'
-start =  sys.argv[2] #0 
-end = sys.argv[3] #3 
-
-
-# In[17]:
-
-
-
 def visible(element):
    #if element.parent.name in [ 'script', '[document]', 'head', 'title','style']:
    if element.parent.name in ['[document]', 'script', 'head', 'title']:
@@ -45,16 +30,10 @@ def visible(element):
    return True
 
 
-# In[18]:
-
-
 def isAboutPage(element):
     if 'about' in element:
         return True
     return False
-
-
-# In[19]:
 
 
 def websiteText(url):
@@ -74,9 +53,6 @@ def websiteText(url):
     return articleResult
 
 
-# In[20]:
-
-
 def getAllHrefs(url):
     hrefs = []
     html_page = urllib.request.urlopen(url)
@@ -93,20 +69,12 @@ def getAllHrefs(url):
 
 
 # # Semantic Text
-
-# In[21]:
-
-
 def getAboutPages(url):
     allHrefs = getAllHrefs(url)
  
     aboutPages = filter(isAboutPage, allHrefs)
     return aboutPages
-        
-
-
-# In[22]:
-
+ 
 
 def removeNonWords(text):
     text =  " ".join(x for x in nltk.wordpunct_tokenize(text) if x.lower() in words or not x.isalpha())
@@ -114,29 +82,16 @@ def removeNonWords(text):
         text = re.sub(otherWord, '', text)
 
     text =  " ".join(x for x in nltk.wordpunct_tokenize(text) if x.lower() in words or not x.isalpha())
-
     return text
 
 
 # # Style Text
-
-# In[23]:
-
-
 def isProperHex(t):
     return bool(re.search('[A-Fa-f0-9]{6}', t))
-
-
-# In[52]:
-
 
 def onlyColour(t):
     startPos = t.find('#')
     return t[startPos:startPos+8]
-
-
-# In[25]:
-
 
 def getStylePages(url):
     htmltext = urllib.request.urlopen(url).read()
@@ -146,11 +101,7 @@ def getStylePages(url):
     return [sheet for sheet in cssSheets if ('//' not in sheet or 'https://' in sheet)] 
 
 
-# In[26]:
-
-
-def getFonts(url, top=3):
-    
+def getFonts(url, top=3):    
     fonts = []
     cssPagesSample = getStylePages(url)
     cssPages = list(cssPagesSample)
@@ -172,8 +123,7 @@ def getFonts(url, top=3):
             if 'font-family' in styletag:
                 startPos = styletag.find('font-family')
                 endPos = styletag.find(';',startPos)
-                fonts.append(styletag[startPos:endPos])
-                
+                fonts.append(styletag[startPos:endPos])                
     
     fonts = np.array(fonts)
     unique, counts = np.unique(fonts, return_counts=True)
@@ -184,11 +134,7 @@ def getFonts(url, top=3):
     return df
 
 
-# In[27]:
-
-
-def getBackgroundColors(url, top=3, renderColor = True):
-    
+def getBackgroundColors(url, top=3, renderColor = True):    
     backgroundColors = []
     cssPagesSample = getStylePages(url)
     cssPages = list(cssPagesSample)
@@ -232,10 +178,6 @@ def getBackgroundColors(url, top=3, renderColor = True):
     else:
         return df
 
-
-# In[28]:
-
-
 def websiteAboutTextOrMainPage(url):
     try: 
         abouts = getAboutPages(url)
@@ -253,71 +195,60 @@ def websiteAboutTextOrMainPage(url):
     return text[0:8000]
 
 
-# In[29]:
-
-
-
-
-
-# In[30]:
-
-
-df = pd.read_csv(inputs)
-
-
-# In[45]:
-
-
-Table = []
-
-
-# In[46]:
-
-
-Row = []
-
-
-# In[47]:
-
-
-for row in df.values[int(start):int(end)]:
-    if row[0] % 100 == 0:
-        print(row[0],str(row[1]))
-    Row.append(row[1])
-    Row.append(row[2])
-    
-    try:
-        colors = getBackgroundColors('https://www.'+row[1]+'/',3,False).values
-    except:
-        colors = []
-    Row.append(colors)
-    
-    try:
-        fonts = getFonts('https://www.'+row[1]+'/',3).values
-    except:
-        fonts = []
-    Row.append(fonts)
-    
-    text = websiteAboutTextOrMainPage('https://www.'+row[1]+'/')
-    Row.append(text)
-    
-    Table.append(Row)
+def main(inputs, start, end, output_name):
+    df = pd.read_csv(inputs)
+    Table = []
     Row = []
+  
+  
+    for row in df.values[int(start):int(end)]:
+        if row[0] % 100 == 0:
+            print(row[0], str(row[1]))
+        Row.append(row[1])
+        Row.append(row[2])
+
+        try:
+            # Get colors
+            colors = getBackgroundColors('https://www.'+row[1]+'/',3,False).values    
+        except:
+            colors = []
+        Row.append(colors)
+
+        try:
+            # Get Fonts
+            fonts = getFonts('https://www.'+row[1]+'/',3).values
+        except:
+            fonts = []
+        Row.append(fonts)
+
+        # Get About / Main page data
+        text = websiteAboutTextOrMainPage('https://www.'+row[1]+'/')
+        Row.append(text)
+
+        Table.append(Row)
+        Row = []
+
+    pd.DataFrame(Table,columns=['Website','WebsiteCategory','Colors','Fonts','Text']).to_csv('./websites/output/' + output_name+'_'+str(start)+'_'+str(end)+'.csv')
 
 
-# In[54]:
+if __name__ == '__main__':    
+    if len(sys.argv) >= 2:
+        inputs = (sys.argv[1]).split('^')  
+    else:
+        print("[Input Error]")
+        print("python WebStyleCrawler.py alexa_websites_All.csv 0 3")
+        sys.exit(1)
+        
+    filename = inputs[0] #'alexa_websites_All.csv'
+    start =  inputs[1] #0 
+    end = inputs[2]    #3 
+    
+    name = filename.split('/')
+    output_name = name[2].split('.')
 
+    print("Inputs : " + filename)
+    print("start : " + start)
+    print("end : " + end)
+    print("Output name : " + output_name[0])
 
-pd.DataFrame(Table,columns=['Website','WebsiteCategory','Colors','Fonts','Text']).to_csv('alexa_websites_'+str(start)+'_'+str(end)+'.csv')
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
+    main(filename, start, end, output_name[0])    

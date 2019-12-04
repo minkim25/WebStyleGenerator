@@ -25,8 +25,8 @@ from pathlib import Path
         
 # Authenticate via OAuth
 # We only need the consumer key to call "posts" function
-# client = pytumblr.TumblrRestClient('nAvaCgNT6dVls4dxKYnWyM1as57L0aSAkSXAayRCPEtNxJSQjr')
-client = pytumblr.TumblrRestClient('moW4Eyg0x7YQ9L2oqtDPvuywMsaWvXmL6bXW2lAYwycBWHvBHb')
+client = pytumblr.TumblrRestClient('nAvaCgNT6dVls4dxKYnWyM1as57L0aSAkSXAayRCPEtNxJSQjr')
+#client = pytumblr.TumblrRestClient('moW4Eyg0x7YQ9L2oqtDPvuywMsaWvXmL6bXW2lAYwycBWHvBHb')
 
 
 # Output : Series

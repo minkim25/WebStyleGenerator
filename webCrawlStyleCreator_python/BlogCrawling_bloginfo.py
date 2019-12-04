@@ -27,26 +27,27 @@ from etl_tumblr_to_cassandra import *
 #     get_ipython().run_line_magic('run', 'etl_tumblr_to_cassandra.ipynb')
 
 
-# In[ ]:
-
-
 # Output : Dictionary
 # Input : Series sources
 # Summary : getPostInfo(sources) runs through sources, which is a pandas Series, and returns a dictionay with the blogname as key and necessary data as value
-def getPostInfo(source):
+def getPostInfo(sources):
+#     info_dict = {}
+#     info_dict[source] = make_json(source) # make_json is from etl_tumblr_to_cassandra.ipynb
+#     return info_dict
+
     info_dict = {}
-    info_dict[source] = make_json(source) # make_json is from etl_tumblr_to_cassandra.ipynb
+    for blog in sources:
+        info_dict[blog] = make_json(blog) # make_json is from etl_tumblr_to_cassandra.ipynb
     return info_dict
 
 # In[ ]:
-def main(seeds, output_filename):        
-    seed_list = seeds.split(';')   
-    for seed in seed_list:           
-        s = json.dumps(getPostInfo(seed))
-    
-        jsonfilename = 'tumblrdata/output/' + output_filename
-        with open(jsonfilename + ".csv", "ab") as f:
-            f.write(bytes(s,"utf-8"))
+def main(seeds, output_filename):             
+    seed_list = seeds.split(';') 
+    s = json.dumps(getPostInfo(seed_list))
+    jsonfilename = 'tumblrdata/output/' + output_filename
+    with gzip.open(jsonfilename + ".gz", "wb") as f:
+        f.write(bytes(s,"utf-8"))     
+                 
         
 # In[ ]:
 if __name__ == '__main__':
