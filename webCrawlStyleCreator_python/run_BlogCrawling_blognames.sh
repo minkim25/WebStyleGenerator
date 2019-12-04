@@ -122,13 +122,14 @@ cleanup_lock
 # Release a lock
 unlock
 
-
 # Run
-export IFS=" "
-for word in $listInput; do
-    echo $word
-  parallel --j $THREAD_COUNT python $SCRIPT_FILE_NAME ::: $word
-done
+parallel --j $THREAD_COUNT python $SCRIPT_FILE_NAME ::: $listInput
+
+# export IFS=" "
+# for word in $listInput; do
+#     echo $word
+#   parallel --j $THREAD_COUNT python $SCRIPT_FILE_NAME ::: $word
+# done
 
 end=`date +%s`
 runtime=$((end-start))

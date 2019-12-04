@@ -17,7 +17,7 @@ TUMBLR_SEEDS_FILE_PATH=$TUMBLR_SEEDS_PATH/$TUMBLR_SDDES_FILE_NAME
 
 DEFAULT_COUNT=5
 LAYER_COUNT=2
-LIMITS_OF_FILE_COUNTS=10
+LIMITS_OF_FILE_COUNTS=100
 
 TUMBLR_BLOG='tumblr'
 WEBSITE='website'
@@ -159,9 +159,14 @@ cleanup_lock
 # Release a lock
 unlock
 
-
 # Run
 parallel --j $THREAD_COUNT python $SCRIPT_FILE_NAME ::: $listInput
+
+# export IFS=" "
+# for word in $listInput; do
+#     echo $word
+#     parallel --j $THREAD_COUNT python $SCRIPT_FILE_NAME ::: $word
+# done
 
 end=`date +%s`
 runtime=$((end-start))
