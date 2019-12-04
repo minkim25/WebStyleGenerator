@@ -14,7 +14,7 @@
 # In[ ]:
 
 
-import sys
+import sys, os
 assert sys.version_info >= (3, 5) # make sure we have Python 3.5+
 import json
 from zipfile import ZipFile 
@@ -33,26 +33,20 @@ from etl_tumblr_to_cassandra import *
 # Output : Dictionary
 # Input : Series sources
 # Summary : getPostInfo(sources) runs through sources, which is a pandas Series, and returns a dictionay with the blogname as key and necessary data as value
-def getPostInfo(sources):
+def getPostInfo(source):
     info_dict = {}
-    for blog in sources:
-        info_dict[blog] = make_json(blog) # make_json is from etl_tumblr_to_cassandra.ipynb
+    info_dict[source] = make_json(source) # make_json is from etl_tumblr_to_cassandra.ipynb
     return info_dict
 
-
-# In[ ]:def main(seeds, output_filename):
-    
-    seed_list = seeds.split(';')
-        
-    for seed in seed_list:
-        print(seed)
-        
+# In[ ]:
+def main(seeds, output_filename):        
+    seed_list = seeds.split(';')   
+    for seed in seed_list:           
         s = json.dumps(getPostInfo(seed))
     
-        jsonfilename = 'tumblrdata/output/' + output_filename + '_' + seed
-        with gzip.open(jsonfilename + ".gz", "ab") as f:
+        jsonfilename = 'tumblrdata/output/' + output_filename
+        with open(jsonfilename + ".csv", "ab") as f:
             f.write(bytes(s,"utf-8"))
-
         
 # In[ ]:
 if __name__ == '__main__':
@@ -62,7 +56,14 @@ if __name__ == '__main__':
         print("Input Error")
         sys.exit(1)
 
-    seeds = startingpoint[0]
-    output_filename = startingpoint[1]
-    
+    print("*******************")
+    print(os.getpid())
+    print(startingpoint)    
+        
+    try:
+        seeds = startingpoint[0]
+        output_filename = startingpoint[1] + '_' + startingpoint[2]
+    except:
+        print("Please check data format")
+
     main(seeds, output_filename)

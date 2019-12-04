@@ -67,6 +67,7 @@ function cleanup_lock(){
 function make_parameter()
 {
     temp=""
+    PID_TEST=$$
 
     # Get a tumblr blog name(seed) 
     while IFS='' read -r blognames
@@ -104,14 +105,13 @@ else
 fi
 
 
+start=`date +%s`
+
 # Create a lock
 lock
 
 echo "$THREAD_COUNT"
-echo "$LOCK_PATH"
-echo "$FILE_NAME"
 echo "$LOCKFILE"
-echo "$TUMBLR_SEEDS_FILE_PATH"
 
 # Get a tumblr blog name(seed) 
 make_parameter 
@@ -122,8 +122,22 @@ cleanup_lock
 # Release a lock
 unlock
 
+
 # Run
-parallel --j $THREAD_COUNT python $SCRIPT_FILE_NAME ::: $listInput
+export IFS=" "
+for word in $listInput; do
+    echo $word
+  parallel --j $THREAD_COUNT python $SCRIPT_FILE_NAME ::: $word
+done
+
+end=`date +%s`
+runtime=$((end-start))
+
+echo "***************************"
+echo "Start Time : $start"
+echo "End Time : $end"
+echo "Run time : $runtime"
+echo "***************************"
 
 if [ $? -eq 0 ]
 then

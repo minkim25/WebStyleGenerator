@@ -12,11 +12,12 @@ SCRIPT_FILE_NAME='BlogCrawling_bloginfo.py'
 PATH_TO_SCRIPT=$PATH_TO_FILES$SCRIPT_FILE_NAME
 
 TUMBLR_SDDES_FILE_NAME='blognames.csv'
-TUMBLR_SEEDS_PATH=$HOME_PATH/tumblrBlogList
+TUMBLR_SEEDS_PATH=$HOME_PATH/tumblrdata
 TUMBLR_SEEDS_FILE_PATH=$TUMBLR_SEEDS_PATH/$TUMBLR_SDDES_FILE_NAME
 
 DEFAULT_COUNT=5
 LAYER_COUNT=2
+LIMITS_OF_FILE_COUNTS=10
 
 TUMBLR_BLOG='tumblr'
 WEBSITE='website'
@@ -69,30 +70,56 @@ function make_parameter()
     temp=""
     listInput=""
     index=0
+    count=0
+    file_path=""
     
     yourfilenames=`ls ./tumblrBlogList/output/*.csv`
     for eachfile in $yourfilenames
-    do
+    do         
         # Get a tumblr blog name(seed) 
         while IFS='' read -r blognames
-        do
+        do 
+            blogname=$(echo $blognames | sed -e "s/ \/ //g")
+          
+            file_name=$blogname
+            
             if [ "$temp" == "" ]; then
                 temp="$blognames"
             else
-                temp="$temp;$blognames"
+                temp="$temp;$blogname"
             fi
-        done < "$eachfile"
+            count=$((count+1))     
 
-        if [ "$listInput" == "" ]; then
-            listInput="$temp&$index"
-        else
-            listInput="$listInput $temp&$index"
-        fi
-        
+        if [ $count -ge $LIMITS_OF_FILE_COUNTS ]; then
+            if [ "$listInput" == "" ]; then
+                listInput="$temp&$index&$file_name"
+                count=0
+                temp=""
+            else
+                listInput="$listInput $temp&$index&$file_name"
+                count=0
+                temp=""
+            fi
+        fi             
         index=$((index+1))
+        done < "$eachfile"
     done
-                    
-#     echo $listInput 
+    
+    if [ -z "$temp" ]; then
+        echo "temp is empty"
+    else
+        echo "temp is NOT empty"
+        if [ "$listInput" == "" ]; then
+            listInput="$temp&$index&$file_name"
+            temp=""
+            count=0
+        else
+            listInput="$listInput $temp&$index&$file_name"
+            temp=""
+            count=0
+        fi
+    fi         
+    echo $listInput 
 }
 
 
@@ -116,15 +143,12 @@ else
         echo "The number of Threads: $THREAD_COUNT, The number of layers: $LAYER_COUNT"
 fi
 
+start=`date +%s`
 
 # Create a lock
 lock
 
 echo "$THREAD_COUNT"
-echo "$LOCK_PATH"
-echo "$FILE_NAME"
-echo "$LOCKFILE"
-echo "$TUMBLR_SEEDS_FILE_PATH"
 
 # Get a tumblr blog name(seed) 
 make_parameter 
@@ -135,8 +159,18 @@ cleanup_lock
 # Release a lock
 unlock
 
+
 # Run
 parallel --j $THREAD_COUNT python $SCRIPT_FILE_NAME ::: $listInput
+
+end=`date +%s`
+runtime=$((end-start))
+
+echo "***************************"
+echo "Start Time : $start"
+echo "End Time : $end"
+echo "Run time : $runtime"
+echo "***************************"
 
 if [ $? -eq 0 ]
 then

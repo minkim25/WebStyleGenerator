@@ -13,7 +13,7 @@
 # In[1]:
 
 
-import sys
+import sys, os
 assert sys.version_info >= (3, 5) # make sure we have Python 3.5+
 import pytumblr
 import pandas as pd
@@ -25,7 +25,8 @@ from pathlib import Path
         
 # Authenticate via OAuth
 # We only need the consumer key to call "posts" function
-client = pytumblr.TumblrRestClient('nAvaCgNT6dVls4dxKYnWyM1as57L0aSAkSXAayRCPEtNxJSQjr')
+# client = pytumblr.TumblrRestClient('nAvaCgNT6dVls4dxKYnWyM1as57L0aSAkSXAayRCPEtNxJSQjr')
+client = pytumblr.TumblrRestClient('moW4Eyg0x7YQ9L2oqtDPvuywMsaWvXmL6bXW2lAYwycBWHvBHb')
 
 
 # Output : Series
@@ -53,7 +54,7 @@ def createSources(seed_blog, all_sources, recursive_count, total_recursive_count
 #Summary: returns list of blognames
 def main(total_recursive_count, seed):
     starting_seed = seed
-    result = createSources(starting_seed, pd.Series([]), 0, total_recursive_count)
+    result = createSources(starting_seed, pd.Series([]), 1, total_recursive_count)
     filepath = 'tumblrBlogList/output/' + seed + '.csv'
     result.to_csv(filepath, index=False)
 
@@ -64,6 +65,9 @@ if __name__ == '__main__':
     else:
         print("Input Error")
         sys.exit(1)
+    
+    pid=os.getpid()
+    print(pid)
         
     # number of extra layers after the original blog seed
     seed = startingpoint[0]
