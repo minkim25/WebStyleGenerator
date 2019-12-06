@@ -33,9 +33,10 @@ def website():
 		fonts = returned['fonts']
 		f_size = returned['f_size']
 		c_size = returned['c_size']
+		total = returned['total']
 		texts = form.content.data
 		return render_template('result_web.html', name=web_name, \
-			colors=colors, fonts=fonts, texts=texts, f_size=f_size, c_size=c_size)
+			colors=colors, fonts=fonts, texts=texts, f_size=f_size, c_size=c_size, total=total)
 			# popular_web=pop_topics_web, popular_blog=pop_topics_blog)
 	return render_template('website.html', name=web_name, form=form)
 		# popular_web=pop_topics_web, popular_blog=pop_topics_blog)
@@ -51,7 +52,7 @@ def result_web():
 	# 	f_size = returned['f_size']
 	# 	c_size = returned['c_size']
 	return render_template('result_web.html', name=web_name, \
-		colors=colors, fonts=fonts, texts=texts, f_size=f_size, c_size=c_size)
+		colors=colors, fonts=fonts, texts=texts, f_size=f_size, c_size=c_size, total=total)
 		# popular_web=pop_topics_web, popular_blog=pop_topics_blog, topic=topic)
 
 @app.route('/blog', methods=['GET', 'POST'])
@@ -64,6 +65,7 @@ def blog():
 		back_color = returned['back_color']
 		text_color = returned['text_color']
 		link_color = returned['link_color']
+		total = returned['total']
 		raw_text = form.content.data
 		texts = raw_text
 		if len(texts) > 33:
@@ -72,7 +74,7 @@ def blog():
 		return render_template('result_blog.html', name=web_name, \
 			title_font=title_font, body_font=body_font, \
 			back_color=back_color, text_color=text_color, link_color=link_color, \
-			texts=texts, raw_text=raw_text)
+			texts=texts, raw_text=raw_text, total=total)
 			# texts=texts, raw_text=raw_text, popular_web=pop_topics_web, popular_blog=pop_topics_blog)
 	return render_template('blog.html', name=web_name, form=form) 
 		# popular_web=pop_topics_web, popular_blog=pop_topics_blog)
@@ -90,7 +92,7 @@ def result_blog():
 	return render_template('result_blog.html', name=web_name, \
 		title_font=title_font, body_font=body_font, \
 		back_color=back_color, text_color=text_color, link_color=link_color, \
-		texts=texts, raw_text=raw_text)
+		texts=texts, raw_text=raw_text, total=total)
 		# texts=texts, raw_text=raw_text, popular_web=pop_topics_web, popular_blog=pop_topics_blog, topic=topic)
 
 @app.route('/link_blog')

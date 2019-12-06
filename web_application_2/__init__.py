@@ -7,6 +7,7 @@ from nltk import word_tokenize
 import pandas as pd
 import re
 import ast
+from pyemd import emd
 
 
 app = Flask(__name__)
@@ -16,7 +17,7 @@ app.config['SECRET_KEY'] = '740dc2dbaf4e3f6dc1307d8c1f9eee6b'
 stop_words = nltk.corpus.stopwords.words('english')
 
 data_web = pd.read_csv('ParsedWebsitesCleanSample.csv')
-data_web = data_web.dropna()
+# data_web = data_web.dropna()
 documents_web = data_web.values
 print("loading pkl file")
 instance_web = pickle.load(open('WordMoverDistance-WebInstanceSLIM.pkl','rb'))
