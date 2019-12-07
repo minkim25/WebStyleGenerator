@@ -13,3 +13,50 @@ Launching the web application:
 Re-running the data pipeline for a new batch of websites:
 <work in progress>
 
+# First time set-up:
+1. Type `python -m venv app-env` in the main repo. We used anaconda as our default python, but other versions > 3.5 should work as well.
+
+2. See SFU 732 instructions for installing PySpark and Cassandra on your server.
+      - Type `nodetool status` to see if Cassandra is running.
+      - If it isn't, type `sudo cassandra -R -f` to start it up.
+3. Set up the table structure by typing:
+   `python InitialSetup\CassandraCreateTables.py`
+
+4. Two pre-trained word embeddings (the well-known google news vectors, but as slimmed down versions for only english words) are expected to be placed in this same folder. 
+   They are cached functions to run a similarity query of websites given a text prompt.
+   Since they are too large for git storage, they have been placed on a google drive. 
+   You can access them here:
+
+
+
+# Launching the web application:
+1. If you are on a windows server, type `app-env\Scripts\activate.bat`
+   Otherwise you can type `source app-env\bin\activate`
+
+2. Then install the required libraries from the "requirements.txt" by typing:
+   `pip install -r requirements.txt`
+
+3. You can now run the web application by typing:
+   `python run.py`
+
+
+
+# Running the data pipeline for a new month (the slow way):
+Note: This is all basically to generate new pkl files for the web application.
+1. Run ETL\CrawlBlog.py
+2. Run ETL\CrawlWeb.py
+After those are done:
+3. Run ETL\TrainBlog.py
+4. Run ETL\TrainWeb.py
+
+# Running the data pipeline for a new month (in parallel):
+Note: If you are running this on a highly distributed cluster, running this set of commands should be faster.
+1. Run run_BlogCrawling_bloginfo.sh
+2. Run run_BlogCrawling_blognames.sh
+
+
+
+We currently have this running on a small server, so you can browse the web application here:
+   - Website style recommender: WebStyleGenerator.com/website
+   - Blog style recommender: WebStyleGenerator.com/blog
+

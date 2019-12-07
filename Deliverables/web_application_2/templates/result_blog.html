@@ -1,0 +1,73 @@
+{% extends 'layout.html' %}
+{% block content %}
+	<h3>Thank you for using {{ name }}!</h3><br />
+	{% if topic %}
+		<h5>The recommended styles for  <u>{{ topic }}</u> are:</h5><br />
+	{% else %}
+		<h5>The recommended styles for your blog are:</h5><br />
+	{% endif %}
+	
+	{% if total < 4 %}
+		<p>We do not have enough data to recommend a web style for "{{texts}}".<br>Please try different words.</p>
+	{% else %}
+		<div class="row">
+			{% for i in [0, 1] %}
+				<div class="col-md-6">
+					<div style="width:300px;height:400px;border:1px solid #000;background-color:{{back_color[i]}};padding:33px 32px 10px;">
+						<div style="width:230px;height:150px;border:0px solid #000;background-color:white;margin-top: auto;">
+							<p style="font-family:{{title_font[i]}};color:{{text_color[i]}};margin:15px 20px 15px;padding:10px 0px 0px;"><b>Sample Title 1</b></p>
+							<p style="font-family:{{body_font[i]}};color:{{text_color[i]}};margin:10px;">
+								{{texts}}
+							</p>
+							<a href="{{ url_for('link_blog', iback_color=back_color[i], itext_color=text_color[i], texts=texts, ilink_color=link_color[i], ititle_font=title_font[i], ibody_font=body_font[i], raw_text=raw_text) }}" style="color:{{link_color[i]}};font-family:{{body_font[i]}};margin:0px 10px 10px;"><u>Sample Link</u></a>
+						</div>
+						<div style="width:230px;height:120px;border:0px solid #000;background-color:white;margin-top: auto;">
+							<p style="font-family:{{title_font[i]}};color:{{text_color[i]}};margin:15px 20px 15px;padding:10px 0px 0px;"><b>Sample Title 2</b></p>
+							<p style="font-family:{{body_font[i]}};color:{{text_color[i]}};margin:10px;">This is sample text in the body section</p>
+						</div>
+					</div>
+					<br>
+					<p>
+						title_font = {{title_font[i]}}<br />
+						body_font  = {{body_font[i]}}<br />
+						back_color = {{back_color[i]}}<br />
+						text_color = {{text_color[i]}}<br />
+						link_color = {{link_color[i]}}<br />
+					</p><!-- <hr style="width:1px height:400px;"> -->
+				</div>
+			{% endfor %}
+		</div><hr><br>
+		<div class="row">
+			{% for i in [2, 3] %}
+				<div class="col-md-6">
+					<div style="width:300px;height:400px;border:1px solid #000;background-color:{{back_color[i]}};padding:33px 32px 10px;">
+						<div style="width:230px;height:150px;border:0px solid #000;background-color:white;margin-top: auto;">
+							<p style="font-family:{{title_font[i]}};color:{{text_color[i]}};margin:15px 20px 15px;padding:10px 0px 0px;"><b>Sample Title 1</b></p>
+							<p style="font-family:{{body_font[i]}};color:{{text_color[i]}};margin:10px;">
+								{{texts}}
+							</p>
+							<a href="{{ url_for('link_blog', iback_color=back_color[i], itext_color=text_color[i], texts=texts, ilink_color=link_color[i], ititle_font=title_font[i], ibody_font=body_font[i], raw_text=raw_text) }}" style="color:{{link_color[i]}};font-family:{{body_font[i]}};margin:0px 10px 10px;"><u>Sample Link</u></a>
+						</div>
+						<div style="width:230px;height:120px;border:0px solid #000;background-color:white;margin-top: auto;">
+							<p style="font-family:{{title_font[i]}};color:{{text_color[i]}};margin:15px 20px 15px;padding:10px 0px 0px;"><b>Sample Title 2</b></p>
+							<p style="font-family:{{body_font[i]}};color:{{text_color[i]}};margin:10px;">This is sample text in the body section</p>
+						</div>
+					</div>
+					<br>
+					<p>
+						title_font = {{title_font[i]}}<br />
+						body_font  = {{body_font[i]}}<br />
+						back_color = {{back_color[i]}}<br />
+						text_color = {{text_color[i]}}<br />
+						link_color = {{link_color[i]}}<br />
+					</p>
+				</div>
+			{% endfor %}
+		</div>
+	{% endif %}
+	<br><br>
+	<div class="text-center">
+		<a href="/home" type="button" class="btn btn-primary" style="background-color: #74a0b5;">Go Back</a>
+	</div><br><br>
+{% endblock content %}
+
